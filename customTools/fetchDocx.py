@@ -7,14 +7,14 @@
 import os
 import docx
 
-class fetch(object):
+class fetchDocx(object):
     """
     读取Docx文件
     filepath:文件路径
     filename:文件名称
     """
     def __init__(self,filepath,filename):
-        super(fetch, self).__init__()
+        super(fetchDocx, self).__init__()
         self.path = os.path.join(filepath,filename)
         self.filepath = filepath
         self.filename = filename
@@ -48,7 +48,7 @@ class fetch(object):
 
     def __extension(self,filename):
         name,extension=os.path.splitext(filename)
-        return extension.startswith('.docx')
+        return extension.lower().startswith('.docx')
 
 
 
