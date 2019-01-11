@@ -7,4 +7,4 @@
 '''
 自己常用的工具包
 '''
-__all__ = ['fetchdocx','thulacTool','fetchpdf']
+__all__ = ['fetchdocx','thulacTool','fetchpdf','doc2docx']
