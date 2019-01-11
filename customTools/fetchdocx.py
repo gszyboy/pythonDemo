@@ -43,7 +43,7 @@ class fetchDocx(object):
                 #return dict(state=state,msg=msg,info=info,text=text)
                 raise e
         else:
-            msg = '文件格式错误,不是docx格式!'
+            msg = '错误:文件格式无效!'
             return dict(state=state,msg=msg,info=info,text=text)
 
     def __extension(self,filename):
