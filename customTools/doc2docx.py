@@ -42,10 +42,9 @@ class Doc2Docx(object):
 
             if newPath == None:
                 newPath = self.filepath
-            else:
+
+            if self.__isExists(newPath):
                 newPath = os.path.abspath(newPath)
-                if os.path.exists(newPath) != True:
-                    os.makedirs(newPath)
 
             if newFile == None:
                 newFile = self.filename + '.docx'
@@ -75,3 +74,12 @@ class Doc2Docx(object):
             return os.path.splitext(path)[0]
         else:
             return os.path.splitext(path)[1]
+    def __isExists(self,path):
+        """检测文件夹是否存在"""
+        tempPath = os.path.abspath(path)
+        isExists = os.path.exists(tempPath)
+        if not isExists:
+            os.makedirs(tempPath)
+            return self.__isExists(tempPath)
+        else:
+            return True
