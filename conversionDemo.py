@@ -19,5 +19,5 @@ doc = Doc2Docx(path,file)#传入原文件路径和原文件名
 result = doc.tConversion(newPath=newpath,newFile=newfile)#传入新文件路径和新文件名(非必须的)
 print(result)#输出dict
 '''
-{'filepath': 'D:\\Demo\\newTestfile\\', 'filename': 'newtest111.docx'}
+{'filepath': 'D:\\Demo\\newTestfile\\', 'filename': 'newtest.docx'}
 '''
