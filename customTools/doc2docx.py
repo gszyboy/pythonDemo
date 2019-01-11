@@ -18,12 +18,16 @@ class Doc2Docx(object):
     """
     def __init__(self, filepath,filename):
         super(Doc2Docx, self).__init__()
-        self.path = os.path.join(filepath,filename)
-        self.filepath = filepath
+        self.path = os.path.realpath(os.path.join(filepath,filename))
+        self.filepath = os.path.abspath(filepath)
         self.filename = filename
 
-    def tConversion(self):
-        '''转换doc文件'''
+    def tConversion(self,newPath=None,newFile=None):
+        """转换doc文件
+        参数newPath:转换后文件存储路径;默认是原路径
+        参数newFile:转换后文件文件名称;默认是原文件名.docx
+        返回一个dict,filepath是转换后文件路径,filename是转换后文件名
+        """
         try:
             #调用word程序
             word = client.Dispatch('Word.Application')
@@ -36,15 +40,27 @@ class Doc2Docx(object):
 
             doc = word.Documents.Open(self.path)
 
+            if newPath == None:
+                newPath = self.filepath
+            else:
+                newPath = os.path.abspath(newPath)
+                if os.path.exists(newPath) != True:
+                    os.makedirs(newPath)
+
+            if newFile == None:
+                newFile = self.filename + '.docx'
+            else:
+                newFile = newFile + '.docx'
+
+            path = os.path.realpath(newPath + newFile)
             #使用参数16表示将doc转换成docx
-            #保存在原路径下面,文件名是在原文件名后面加.docx
-            doc.SaveAs(self.path + '.docx',16)
+            doc.SaveAs(path,16)
 
             tempname = doc.__str__()
 
             doc.Close()
             word.Quit()
-            return dict(filepath=self.filepath,filename=tempname)
+            return dict(filepath=newPath,filename=tempname)
         except Exception as e:
             raise e
 
